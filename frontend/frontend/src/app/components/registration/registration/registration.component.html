@@ -1,0 +1,50 @@
+<form class="form-horizontal" (ngSubmit)="f.form.valid && addUser()" #f="ngForm">
+  <fieldset>
+
+    <legend>Registration</legend>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="firstName">First name</label>
+      <div class="col-md-4">
+        <input id="firstName" name="firstName" type="text" placeholder="Jack" class="form-control input-md" required="">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="familyName">Family name</label>
+      <div class="col-md-4">
+        <input id="familyName" name="familyName" type="text" placeholder="DOE" class="form-control input-md" required="">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="birthday">Date of birth</label>
+      <div class="col-md-4">
+        <input id="birthday" name="birthday" type="date"
+               max="{{minDate | date:'yyyy-MM-dd'}}"
+               class="form-control input-md" required="">
+      </div>
+    </div>
+
+
+    <!-- Password input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="passwordinput">Password</label>
+      <div class="col-md-4">
+        <input id="passwordinput" name="passwordinput" type="password" placeholder="*********" class="form-control input-md" required="">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="email">Email</label>
+      <div class="col-md-4">
+        <input id="email" name="email" type="email" placeholder="xx@x.xx" class="form-control input-md" required="">
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary add-button right" >Add me :)</button>
+
+
+  </fieldset>
+</form>

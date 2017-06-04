@@ -1,0 +1,27 @@
+<div class="jumbotron jumbotron-fluid login-result-container">
+  <h2>My profile</h2>
+  <br/>
+  <div class="row login-info-card">
+    <i class="fa fa-user user-profile card-img-top col-xs-3" aria-hidden="true"></i>
+    <div class="col-xs-9">
+      <div class="row">
+        <span class="col-xs-3">user: </span>
+        <span class="col-xs-9">{{currentUserService.user.username}} </span>
+      </div>
+      <div class="row">
+        <span class="col-xs-3">roles: </span>
+        <span class="col-xs-9">
+          <ul>
+              <li *ngFor="let role of currentUserService.user.roles">
+                  {{role}}
+                </li>
+          </ul>
+        </span>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div class="row">
+    <a [routerLink]="['/login']" class="btn btn-danger logout">Logout</a>
+  </div>
+</div>

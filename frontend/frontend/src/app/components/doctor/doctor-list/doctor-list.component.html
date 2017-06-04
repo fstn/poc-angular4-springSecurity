@@ -1,0 +1,29 @@
+<div class="jumbotron jumbotron-fluid">
+  <div>
+    <h2>Doctors from secure api end point:</h2>
+    <table class="table table-striped">
+      <thead>
+      <th>
+        Image
+      </th>
+      <th (click)="setOrder('name')" class="cursor-hand">
+        Name <span [hidden]="reverse">▼</span><span [hidden]="!reverse">▲</span>
+      </th>
+      <th>
+        Number
+      </th>
+      </thead>
+      <tr *ngFor="let doctor of doctors  | orderBy: order:reverse" (click)="selectDoctor(doctor)" class="cursor-hand">
+        <td>
+          <img class="image" src="https://unsplash.it/20/20/?random" style="height: 20px">
+        </td>
+        <td>
+          {{doctor.name}}
+        </td>
+        <td>
+          {{doctor.number}}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

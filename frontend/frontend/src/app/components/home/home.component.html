@@ -1,0 +1,7 @@
+<div class="row home-container-header" >
+  <app-login-result class="col-xs-12 col-md-6"></app-login-result>
+  <app-add-doctor (onAddNewDoctor)="list.refresh()" class="col-xs-12 col-md-6 "></app-add-doctor>
+</div>
+<div class="row">
+  <app-doctor-list #list (onAddNewDoctor)="refresh()" class="col-md-12"></app-doctor-list>
+</div>
