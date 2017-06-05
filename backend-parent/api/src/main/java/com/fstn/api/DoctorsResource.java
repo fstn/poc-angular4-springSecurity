@@ -4,17 +4,11 @@ import com.fstn.api.sanity.DoctorSanity;
 import com.fstn.constant.Role;
 import com.fstn.model.Doctor;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -30,7 +24,7 @@ public class DoctorsResource {
      */
     protected static final String PATH = "/doctors";
     private final DoctorSanity doctorSanity;
-    private List<Doctor> listOfDoctors;
+    private final DoctorsMock doctorsMock;
 
     /**
      * Instantiates a new Doctors resource.
@@ -38,18 +32,13 @@ public class DoctorsResource {
      * @param doctorSanity the doctor sanity
      */
     @Inject
-    public DoctorsResource(DoctorSanity doctorSanity) {
+    public DoctorsResource(DoctorSanity doctorSanity, DoctorsMock doctorsMock) {
+
         this.doctorSanity = doctorSanity;
+        this.doctorsMock = doctorsMock;
     }
 
-    @PostConstruct
-    private void initMock() {
-        listOfDoctors = Collections.synchronizedList(new ArrayList<>());
-        for (int i = 0; i < 10; i++) {
-            String doctorIncrement = String.format("%02d", i);
-            listOfDoctors.add(new Doctor("doctor" + doctorIncrement, "04585960" + doctorIncrement));
-        }
-    }
+
 
     /**
      * Gets all doctors.
@@ -60,7 +49,7 @@ public class DoctorsResource {
     @RolesAllowed({Role.ROLE_USER})
     @Produces(MediaType.APPLICATION_JSON)
     public List<Doctor> getAllDoctors() {
-        return listOfDoctors;
+        return doctorsMock.getListOfDoctors();
     }
 
 
@@ -71,9 +60,9 @@ public class DoctorsResource {
      */
     @POST
     @RolesAllowed(Role.ROLE_ADMIN)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public void addDoctor(final Doctor doctor) {
-        doctorSanity.checkNew(doctor, listOfDoctors);
-        listOfDoctors.add(doctor);
+        doctorSanity.checkNew(doctor, doctorsMock.getListOfDoctors());
+        doctorsMock.getListOfDoctors().add(doctor);
     }
 }
