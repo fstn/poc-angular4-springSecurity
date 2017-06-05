@@ -7,7 +7,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -44,7 +43,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
                 new UsernamePasswordAuthenticationToken(
                         user.getUsername(),
                         user.getPassword(),
-                        Collections.<GrantedAuthority>emptyList()
+                        Collections.emptyList()
                 )
         );
     }

@@ -3,11 +3,11 @@ package com.fstn.api;
 import com.fstn.api.sanity.DoctorSanity;
 import com.fstn.constant.Role;
 import com.fstn.model.Doctor;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -21,7 +21,7 @@ import java.util.List;
  * Endpoint api class
  * Created by stephen on 01/06/2017.
  */
-@Component
+@Named
 @Path(DoctorsResource.PATH)
 public class DoctorsResource {
 

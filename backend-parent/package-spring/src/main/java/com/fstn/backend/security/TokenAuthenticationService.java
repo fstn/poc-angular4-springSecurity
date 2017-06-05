@@ -6,6 +6,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,10 +53,10 @@ class TokenAuthenticationService {
      * @throws IOException the io exception
      */
     static void addAuthentication(HttpServletResponse res, Authentication authentication) throws IOException {
-        HashMap<String, Object> claims = new HashMap();
+        HashMap<String, Object> claims = new HashMap<>();
         List<String> roles = authentication.getAuthorities()
                 .stream()
-                .map(authority -> authority.getAuthority())
+                .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
         claims.put("roles", mapper.writeValueAsString(roles));
@@ -94,9 +95,10 @@ class TokenAuthenticationService {
                             .getBody().get("roles").toString(),
                     TypeFactory.defaultInstance().constructParametricType(List.class, String.class));
 
-            List<SimpleGrantedAuthority> authorities = grantedAuths.stream().map(auth -> {
-                return new SimpleGrantedAuthority(auth);
-            }).collect(Collectors.toList());
+            List<SimpleGrantedAuthority> authorities = grantedAuths
+                    .stream()
+                    .map(auth -> new SimpleGrantedAuthority(auth))
+                    .collect(Collectors.toList());
 
             return user != null ?
                     new UsernamePasswordAuthenticationToken(emptyList(), user, authorities) :

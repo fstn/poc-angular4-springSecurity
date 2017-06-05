@@ -42,10 +42,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * Add default mock users
+     * Configure global.
      *
-     * @param auth
-     * @throws Exception
+     * @param auth the auth
+     * @throws Exception the exception
      */
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

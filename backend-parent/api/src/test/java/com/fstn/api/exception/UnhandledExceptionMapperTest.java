@@ -7,6 +7,7 @@ import org.junit.Test;
 import javax.ws.rs.core.Response;
 
 /**
+ * UnhandledExceptionMapperTest
  * Created by stephen on 05/06/2017.
  */
 public class UnhandledExceptionMapperTest {

@@ -13,7 +13,7 @@
     <artifactId>poc-ng-spring-api</artifactId>
     <name>poc-ng-spring-api</name>
 
-    <description>Springboot api for project for Angular4 Springboot poc</description>
+    <description>Springboot api for project for Angular4 SpringBoot poc</description>
 
     <dependencies>
         <dependency>
@@ -25,6 +25,10 @@
             <groupId>com.fstn</groupId>
             <artifactId>poc-ng-spring-model</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
         </dependency>
     </dependencies>
 </project>
