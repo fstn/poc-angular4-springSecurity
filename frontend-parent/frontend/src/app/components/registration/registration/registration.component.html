@@ -1,0 +1,51 @@
+<form class="form-horizontal" (ngSubmit)="f.form.valid && addUser()" #f="ngForm" novalidate>
+  <fieldset>
+    <legend>Registration</legend>
+
+    <div class="form-group" [ngClass]="{ 'has-error': firstName.touched && !firstName.valid }">
+      <label class="col-md-4 control-label" for="firstName">First name</label>
+      <div class="col-md-4">
+        <input id="firstName" name="firstName" #firstName="ngModel" type="text"
+               placeholder="Jack" [(ngModel)]="model.firstName" class="form-control input-md" required>
+      </div>
+    </div>
+
+    <div class="form-group" [ngClass]="{ 'has-error': familyName.touched  && !familyName.valid }">
+      <label class="col-md-4 control-label" for="familyName">Family name</label>
+      <div class="col-md-4">
+        <input id="familyName" name="familyName" #familyName="ngModel" type="text"
+               placeholder="DOE" [(ngModel)]="model.familyName" class="form-control input-md" required>
+      </div>
+    </div>
+
+    <div class="form-group" [ngClass]="{ 'has-error': birthday.touched && !birthday.valid }">
+      <label class="col-md-4 control-label" for="birthday">Date of birth</label>
+      <div class="col-md-4">
+        <input id="birthday" name="birthday" type="date" #birthday="ngModel"
+               max="{{minDate | date:'yyyy-MM-dd'}}" [(ngModel)]="model.birthday"
+               class="form-control input-md" required="">
+      </div>
+    </div>
+
+    <!-- Password input-->
+    <div class="form-group" [ngClass]="{ 'has-error': password.touched && !password.valid }">
+      <label class="col-md-4 control-label" for="password">Password</label>
+      <div class="col-md-4">
+        <input id="password" name="password" #password="ngModel" type="password"
+               placeholder="*********" [(ngModel)]="model.password" class="form-control input-md" required>
+      </div>
+    </div>
+
+    <div class="form-group" [ngClass]="{ 'has-error': email.touched  && !email.valid }">
+      <label class="col-md-4 control-label" for="email">Email</label>
+      <div class="col-md-4">
+        <input id="email" name="email" #email="ngModel" type="email"
+               pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"
+               placeholder="xx@x.xx" [(ngModel)]="model.email" class="form-control input-md" required>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary add-button right" [disabled]="!f.form.valid">Add me :)</button>
+
+  </fieldset>
+</form>
+

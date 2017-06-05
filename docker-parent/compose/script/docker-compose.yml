@@ -1,0 +1,52 @@
+version: '2.1'
+services:
+  # Backend springboot container
+  # Expose backend jar
+  ## PROVIDE:
+  #    - /doctors REST API
+  #    - /login Spring security login
+  ## NETWORK LINK
+  #    - no network link
+  poc-ng-spring-backend:
+    environment:
+     - TZ=Europe/Paris
+    container_name: poc-ng-spring-backend
+    image: poc-ng-spring-backend:${docker.tag}
+    ports:
+     # Rest API port
+     - 9386:8080
+     # Remote debug port
+     - 8100:8000
+    healthcheck:
+        test: curl -f http://localhost:8080/health
+        interval: 5s
+        timeout: 30s
+        retries: 10
+    networks:
+     - poc-ng-spring-network
+  # frontend container
+  ## PROVIDE:
+  #    - proxy path /back for REST call to backend
+  #    - Angular4 website
+  poc-ng-spring-frontend:
+    container_name:  poc-ng-spring-frontend
+    image: poc-ng-spring-frontend:${docker.tag}
+    ports:
+    # NGINX port
+     - 443:443
+    healthcheck:
+        test: curl -f http://localhost:80
+        interval: 10s
+        timeout: 60s
+        retries: 5
+    volumes:
+    # Use to debug frontend web site
+     - ${docker.frontend.volume}
+    networks:
+     -  poc-ng-spring-network
+    depends_on:
+      poc-ng-spring-backend:
+       condition: service_healthy
+networks:
+   poc-ng-spring-network:
+    driver: bridge

@@ -1,0 +1,29 @@
+<div class="jumbotron jumbotron-fluid add-doctor-container">
+  <h2>Add a doctor (Only for CGM Admins)</h2>
+
+  <!-- Add doctor form -->
+  <form class="form-horizontal" (ngSubmit)="f.form.valid && addDoctor()" #f="ngForm" novalidate>
+    <div class="form-group" [ngClass]="{ 'has-error': name.touched  && !name.valid  }">
+      <label for="name">Name</label>
+      <input type="text" class="form-control"
+             name="name" id="name" placeholder="Jane Doe"
+             #name="ngModel" [(ngModel)]="model.name"
+             required>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': number.touched  && !number.valid  }">
+      <label for="number">Number</label>
+      <input type="tel" class="form-control"
+             name="number" id="number" placeholder="0495858696"
+             #number="ngModel"
+             [(ngModel)]="model.number"
+             required>
+    </div>
+    <br/>
+    <span *ngIf="!currentUser.isAdmin()" class="alert-info">Only admin users can add doctors (see @RolesAllowed inside DoctorResource)</span>
+
+    <br/>
+    <button type="submit" [disabled]="!currentUser.isAdmin() || !f.form.valid" class="btn btn-primary add-button">Add
+      doctor
+    </button>
+  </form>
+</div>

@@ -1,0 +1,26 @@
+<div class="jumbotron">
+  <div class="row">
+    <h1 (click)="showMore=true" class="col-xs-12 cursor-hand ">{{doctor.name}}</h1>
+    <div *ngIf="showMore" class="visible-xs col-xs-12 expandable">
+      <h2> {{doctor.number}}</h2>
+      <p>
+        Phasellus auctor tincidunt est, nec pretium ligula porta et. Morbi ac congue velit. Curabitur a tortor vel quam
+        fermentum mollis posuere ut erat. Cras tincidunt dolor ac suscipit fringilla. Nunc vel mi auctor, gravida nisl
+        vitae, scelerisque est. Curabitur ornare quis odio et aliquet. Quisque eget auctor urna.
+      </p>
+    </div>
+  </div>
+  <div class="row center">
+    <img class="image" src="https://unsplash.it/100/100/?random&{{number}}" style="height: 200px">
+  </div>
+  <div class="row hidden-xs">
+    <h2 class="col-xs-12"> {{doctor.number}}</h2>
+    <p>
+      Phasellus auctor tincidunt est, nec pretium ligula porta et. Morbi ac congue velit. Curabitur a tortor vel quam
+      fermentum mollis posuere ut erat. Cras tincidunt dolor ac suscipit fringilla. Nunc vel mi auctor, gravida nisl
+      vitae, scelerisque est. Curabitur ornare quis odio et aliquet. Quisque eget auctor urna.
+    </p>
+  </div>
+  <br/>
+  <a [routerLink]="['/doctors']" class="btn btn-danger right col-xs-12 col-sm-2">Back to list</a>
+</div>
